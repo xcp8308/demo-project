@@ -13,61 +13,42 @@
 - 研究者判断：
 ```
 
-## 2026-06-03 讲座准备
+## 2026-08-24 10:15
 
-- 工具：GitHub Copilot / Claude Code
-- 任务：创建合成 DID 演示项目、脚本、讲座 slides 和 handout 初稿
-- 接受的输出：项目结构、Python 数据生成脚本、Python DID 分析脚本、Stata/Matlab fallback 脚本、Jupyter 研究备忘录、LaTeX 正式写作骨架
-- 拒绝或修改的输出：不使用真实数据；不把模拟结果解释为真实政策结论；不把 MCP 配置作为现场必要条件
-- 验证方式：运行 Python 脚本，导出 Jupyter notebook，渲染讲座 slides/handout，检查输出是否可从脚本再生成
-- 研究者判断：本项目只用于演示科研工作流，不用于实证结论
+- **工具**：VS Code deepseek
+- **任务**：Part A - 设计 11 项 DID 稳健性检验 Prompt（涵盖常规检验与特定机制检验）。
+- **接受的输出**：接受了严格按照“目标、边界、验证、汇报”四要素结构生成的 Markdown 格式 Prompt 原文。
+- **拒绝或修改的输出**：拒绝了 AI 在安慰剂检验（R2）中未设置随机数种子（random seed）的代码；大幅删改了其在汇报中脱离合成数据、过度引申真实政策因果关系的越界解释。
+- **验证方式**：检查统计代码逻辑能否在本地合成面板上跑通，并交叉比对生成的伪估计均值是否符合 DGP（数据生成过程）设定。
+- **研究者判断**：面对合成数据时，AI 极容易“入戏太深”，将统计结果等同于现实世界的决定论。必须通过“边界”条件强制声明数据性质，截断其发散性解释。
 
-## 2026-06-03 数字化转型 demo 修订
 
-- 工具：GitHub Copilot / VS Code / Stata CLI / Matlab CLI
-- 任务：将原通用 DID demo 改为“数字化转型与企业生产率”的模拟研究项目
-- 接受的输出：企业面板数据生成脚本、Stata DID/事件研究/安慰剂检验脚本、Matlab 理论模型脚本、Stata kernel notebook、Matlab kernel notebook、研究备忘录 notebook、LaTeX 初稿
-- 拒绝或修改的输出：不再使用泛化政策示例；不把模拟结果解释为真实企业数字化转型效果；不要求现场 MCP 必须可用
-- 验证方式：通过 CLI 重跑 Python、Stata、Matlab、LaTeX、Quarto 与 notebook JSON 检查
-- 研究者判断：该 demo 更贴近经济学研究学生和教师的完整工作流，但仍然只用于教学展示
 
-## 2026-06-03 双语论文写作示范
+## 2026-08-24 11:10 
 
-- 工具：GitHub Copilot / VS Code / Crossref API / XeLaTeX
-- 任务：将 Stata DID notebook、Matlab AI 采用模型 notebook 与 output 结果扩展为中英文经济学论文写作示范，并把对应 prompt 放入 prompt-cards.md
-- 输入材料：README.md、notebooks/digital_stata_did.ipynb、notebooks/digital_matlab_model.ipynb、notebooks/research_memo.ipynb、output/stata_did_results.csv、output/stata_event_study.csv、output/stata_placebo_results.csv、output/matlab_theory_estimates.csv、output/matlab_productivity_surface.csv、output/digital_parallel_trends.png、output/stata_event_study_ci.png、output/matlab_theory_model.png、paper/main.tex
-- 接受的输出：prompts/prompt-cards.md 第 9 张“双语经济学论文写作”prompt；paper/main_zh.tex；paper/main_en.tex；paper/references.bib
-- 拒绝或修改的输出：不引用未能通过 Crossref/DOI 核查的旧 DOI 条目；不把合成数据结果写成真实企业数字化转型证据；不记录隐藏思维链，只记录可审计的决策摘要和验证证据
-- 关键写作决策摘要：中文与英文论文分成两个 LaTeX 源文件；两篇论文都保留完整经济学论文结构；真实 output 数值进入结果段落；Matlab 模型定位为机制示范而非结构估计
-- 文献核查方式：通过 Crossref API 核查 DOI 元数据。已核查并使用 Bloom, Sadun and Van Reenen (2012)；Bertrand, Duflo and Mullainathan (2004)；Callaway and Sant'Anna (2021)；Sun and Abraham (2021)；Goodman-Bacon (2021)；Acemoglu and Restrepo (2019)；Agrawal, Gans and Goldfarb (2019)。旧 DOI 10.1162/003355303322552328 未能通过 Crossref 返回元数据，未纳入 references.bib
-- LaTeX 编译命令：latexmk -xelatex -outdir=paper -interaction=nonstopmode -halt-on-error paper/main_zh.tex；latexmk -xelatex -outdir=paper -interaction=nonstopmode -halt-on-error paper/main_en.tex
-- 验证方式：已运行 XeLaTeX 编译命令并确认 paper/main_zh.pdf、paper/main_en.pdf 非空；检查 Markdown/LaTeX 诊断
-- 研究者判断：该写作示范适合课堂展示“基于已验证结果写论文”的 AI 工作流，但论文中的实证结论仍仅适用于合成数据演示
+- **工具**：VS Code deepseek
+- **任务**：Part B - 稳健性检验流程的 Skill 制度化（SKILL.md）。
+- **接受的输出**：接受了包含“触发条件、背景知识、工作步骤、检查清单、边界条件、验证方式”六大模块的完整 Skill 结构。
+- **拒绝或修改的输出**：拒绝了初版脚本中直接硬编码 `digital`、`log_tfp` 等特定变量名和 `firm_id` 聚类层级的做法。
+- **验证方式**：使用该 Skill 重新执行 R2 安慰剂检验，确认其能自动读取 README 抓取对应变量，并成功比对和对齐了真实的基准系数 0.121。
+- **研究者判断**：将学术要求内置为“制度（Skill）”远好于每次的“保姆式提醒”。加入“环境侦察”步骤后，工具成功从本项目的定制脚本进化为了可迁移的因果检验流水线。
 
-## 2026-06-03 Stata 回归表自动化
 
-- 工具：GitHub Copilot / VS Code / Stata CLI / XeLaTeX
-- 任务：调整 digital_stata_did.ipynb 的 DID 回归分析部分，生成可被 LaTeX 直接引用的星号显著性回归表，并同步更新中英文论文
-- 接受的输出：notebooks/digital_stata_did.ipynb 中新增 LaTeX 表格导出逻辑；scripts/run_stata_did.do 中同步新增 fallback 导出逻辑；output/stata_regression_table.tex；paper/main_zh.tex 与 paper/main_en.tex 中的主结果表改为 \input{} 自动引用
-- 拒绝或修改的输出：不再在论文中手写单变量简表，避免论文表格与 Stata 回归结果分叉；不依赖 esttab/estout 等额外用户命令生成最终表格
-- 验证方式：运行 python -m json.tool 检查 notebook JSON；运行 stata -b do scripts/run_stata_did.do 生成表格；运行 XeLaTeX 编译中英文论文并确认 PDF 非空
-- 研究者判断：该表格适合课堂展示“从 Stata 回归结果到 LaTeX 论文表格”的自动化链条；数值仍仅服务于合成数据教学示范
+## 2026-08-25 14:30
 
-## 2026-06-03 中文 Word 论文格式转换
+- **工具**：VS Code deepseek
+- **任务**：Part C - 设计综合评估 Agent（eval-did-robustness）并生成结论报告。
+- **接受的输出**：接受了 Agent 按照 S1-S6 流程输出的综合评估报告，特别是其针对残余威胁（S4）和写作建议（S6）的输出。
+- **拒绝或修改的输出**：拒绝了第一版 Agent 仅无脑罗列 11 项检验 p 值和通过率的“复读机”行为，强制通过指令令其结合经济学机制进行解读。
+- **验证方式**：人工核对 Agent 报告引用的基准结果（0.121）和聚类标准误（0.005）是否与 CSV 文件严格一致，并确认其遵守了“禁止修改 tex 源码”的边界权限。
+- **研究者判断**：Agent 的核心价值在于充当“审稿人（Reviewer）”角色，主动寻找识别框架的局限性，并将冰冷的统计数字翻译为学术论文 Discussion 部分中极具防御性的修辞策略。
 
-- 工具：GitHub Copilot / VS Code / python-docx
-- 任务：将 paper/main_zh.tex 转换为符合中文期刊排版要求的 Word 文档
-- 接受的输出：scripts/convert_zh_paper_to_word.py；paper/main_zh_word.docx
-- 格式处理摘要：标题居中宋体小三；作者信息使用星号脚注式说明；内容提要使用黑体小四标题与仿宋小四正文；节标题居中宋体小三；正文使用仿宋并设置首行缩进；表格变量名改为中文，采用 Panel 行、分组行、变量名行、列号行结构；表格正文使用仿宋小五，备注使用宋体六号；参考文献无编号并按英文期刊格式列出完整作者
-- 拒绝或修改的输出：未直接使用 Pandoc 默认转换，因为默认样式难以满足中文字体、字号、表格表头层级和参考文献格式要求；改用 python-docx 直接控制 Word 样式
-- 验证方式：运行转换脚本；确认 paper/main_zh_word.docx 非空；使用 unzip -t 检查 docx 压缩包结构；使用 python-docx 读取段落、表格和图片关系数量；检查脚本诊断无错误
-- 研究者判断：该 Word 文档适合作为中文期刊格式演示版；由于 python-docx 不原生支持真实 Word 脚注，作者信息采用星号标记加脚注式说明段落呈现
 
-## 2026-06-04 11:10 中文 Word 论文重新导出
+## 2026-08-25 16:45
 
-- 工具：Codex / python-docx
-- 任务：读取 latex-to-word-zh 技能说明，并将 paper/main_zh.tex 重新导出为中文 Word 文档
-- 接受的输出：复用 scripts/convert_zh_paper_to_word.py 生成 paper/main_zh_word.docx
-- 拒绝或修改的输出：未改动 LaTeX 源文件和转换脚本；继续使用 python-docx 而非 Pandoc，以保留中文字体、字号、表格和图片格式控制
-- 验证方式：运行 python scripts/convert_zh_paper_to_word.py；运行 python -m py_compile scripts/convert_zh_paper_to_word.py；确认 paper/main_zh_word.docx 非空；运行 unzip -t paper/main_zh_word.docx；使用 python-docx 确认文档包含 48 个段落、1 个表格和 3 张图片
-- 研究者判断：重新导出的 Word 文件可作为 main_zh.tex 的中文期刊格式 Word 版本；作者说明仍采用星号加脚注式段落呈现
+- **工具**：VS Code deepseek
+- **任务**：Part D & E - 完善 LaTeX 论文闭环（整合稳健性小节与机制分析），并撰写两轮迭代反思。
+- **接受的输出**：接受了标准 LaTeX 语法的段落融合，以及新增的“异质性与实证机制分析”章节和强化的“合成数据边界声明”排版。
+- **拒绝或修改的输出**：拒绝并回退了 AI 在协助重构 LaTeX 源码时，试图自作主张修改原有图片（`matlab_theory_model.png`）引用路径的越界操作。
+- **验证方式**：在终端使用 `latexmk -xelatex` 命令编译论文源文件，检查生成的 PDF 图文渲染、表格对齐及中英文字体是否完全正常，无报错中断。
+- **研究者判断**：在长文本或格式严谨的代码写作（如 LaTeX）环节，AI 极易产生幻觉破坏已有排版结构。Git 结合 `git diff` 审查不仅是作业要求，更是实战中不可或缺的防呆回退机制。
